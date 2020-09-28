@@ -9,15 +9,13 @@ public class TcpServerConfigurationProperties {
 
     private String url;
     private int port;
-    private int poolSize;
 
     public TcpServerConfigurationProperties() { }
 
-    public TcpServerConfigurationProperties( final String url, final int port, int poolSize ) {
+    public TcpServerConfigurationProperties( final String url, final int port ) {
 
         this.url = url;
         this.port = port;
-        this.poolSize = poolSize;
 
     }
 
@@ -41,17 +39,6 @@ public class TcpServerConfigurationProperties {
     public int getPort() {
 
         return port;
-    }
-
-    public void setPoolSize(int poolSize) {
-
-        this.poolSize = poolSize;
-
-    }
-
-    public int getPoolSize() {
-
-        return poolSize;
     }
 
 }

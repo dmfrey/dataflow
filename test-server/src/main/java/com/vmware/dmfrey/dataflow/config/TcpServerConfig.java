@@ -4,6 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
 import org.springframework.context.event.EventListener;
 import org.springframework.integration.dsl.IntegrationFlow;
 import org.springframework.integration.dsl.IntegrationFlows;
@@ -62,6 +63,7 @@ public class TcpServerConfig {
     }
 
     @Bean
+    @Profile( "!test" )
     public IntegrationFlow serverOut() {
 
         return IntegrationFlows.from( () -> "seed", e -> e.poller( Pollers.fixedDelay(5, TimeUnit.SECONDS, 5 ) ) )
@@ -84,6 +86,11 @@ public class TcpServerConfig {
                     var connectionId = (String) h.get( IpHeaders.CONNECTION_ID );
                     var client = clients.get( connectionId );
                     log.info( "Connection check for client {}", client );
+
+                    if( null != client.getLastHeartbeat() ) {
+
+                        return String.format( "closing client connection : %s", client.getClientId() );
+                    }
 
                     var now = LocalDateTime.now();
                     if( Duration.between( client.getLastHeartbeat(), now ).toMillis() > HEARTBEAT_CHECK ) {

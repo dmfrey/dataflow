@@ -9,7 +9,7 @@ logging.level:
   com.vmware.dmfrey.dataflow: DEBUG
 
 server:
-  port: 9091
+  port: ${PORT:9091}
 
 client:
   id: 14f47426-d6f5-4cd9-99e7-af2f47dffe54
@@ -17,7 +17,6 @@ client:
 tcp-server:
   url: localhost
   port: 6666
-  poolSize: 5
 
 spring:
 
@@ -29,3 +28,7 @@ spring:
           destination: adapter.raw
 
       source: adapter
+
+---
+spring:
+  profiles: kubernetes

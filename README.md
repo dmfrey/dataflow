@@ -16,8 +16,8 @@ transform them into an `InternalMessage` and stream them to an Apache Kafka dest
 
 ### Prerequisites
 
-* Apache Kafka (requires Zookeeper)
-* Redis
+* Apache Kafka (installed when setting up Spring cloud Data Flow https://dataflow.spring.io/docs/installation/kubernetes/kubectl/)
+* Redis (installed from bitnami helm chart)
 
 ### Running the Apps
 
@@ -47,3 +47,15 @@ Subsequent changes will create a Spring Cloud Dataflow pipeline to process this 
 
 Spring Boot provides native support for container images.  This, as well as appropriate kubernetes deployment artifacts
 will be added.
+
+### Steps
+
+**NOTE:** be sure to have installed both kafka and redis prior to performing these steps!!
+
+1. Open the terminal and execute `./mvnw -pl connection-handler spring-boot:build-image`
+1. Wait for the image to be added to the local docker registry, verify with `docker images`
+1. Tag the docker image `docker tag [IMAGE ID] [DOCKERHUB USERNAME]/connection-handler:latest`
+1. Push the image `docker push dmfrey/connection-handler:latest`
+1. Edit `/connection-handler/kubernetes/connection-handler-deployment.yml`, set the`image` to `[DOCKERHUB USERNAME]/connection-handler`
+1. Create the deployment `kubectl create -f /connection-handler/kubernetes/connection-handler-deployment.yml`
+

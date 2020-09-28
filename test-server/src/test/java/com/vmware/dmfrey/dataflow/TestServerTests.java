@@ -1,13 +1,19 @@
 package com.vmware.dmfrey.dataflow;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ActiveProfiles;
 
 import java.io.IOException;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+@SpringBootTest
+@ActiveProfiles( "test" )
+@Disabled
 public class TestServerTests {
 
     static String serverIp = "127.0.0.1";
@@ -36,6 +42,7 @@ public class TestServerTests {
     }
 
     @Test
+    @Disabled
     void whenClient1Connects_verifyClientRegistrationReceived() throws IOException {
 
         String clientId = "client-1";
@@ -54,6 +61,7 @@ public class TestServerTests {
     }
 
     @Test
+    @Disabled
     void whenClient2Connects_verifyClientRegistrationReceived() throws IOException {
 
         String clientId = "client-2";

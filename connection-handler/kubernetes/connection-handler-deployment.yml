@@ -1,0 +1,50 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: connection-handler
+  name: connection-handler
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: connection-handler
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: connection-handler
+    spec:
+      containers:
+        - image: dmfrey/connection-handler
+          name: connection-handler
+          ports:
+            - containerPort: 8080
+          env:
+
+            - name: PORT
+              value: "8080"
+
+            - name: SPRING_PROFILES_ACTIVE
+              value: kubernetes
+
+            - name: SPRING_CLOUD_STREAM_KAFKA_BINDER_BROKERS
+              value: "kafka:9092"
+
+            - name: SPRING_REDIS_SENTINEL_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  key: redis-password
+                  name: redis-1601316548
+            - name: SPRING_REDIS_SENTINEL_MASTER
+              value: "redis-1601316548-master:6379"
+            - name: SPRING_REDIS_SENTINEL_NODES
+              value: "redis-1601316548-slave:6379"
+
+            - name: TCP-SERVER_URL
+              value: "192.168.86.78"
+
+          resources: {}
+status: {}
