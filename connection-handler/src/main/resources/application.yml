@@ -1,12 +1,15 @@
 
 logging.level:
-  org.springframework.cloud.stream: INFO
-  org.springframework.integration.ip: INFO
+  org.apache.kafka: WARN
+  org.springframework.cloud.stream: WARN
+  org.springframework.cloud.function: WARN
+  org.springframework.integration.handler: WARN
+  org.springframework.integration.ip: WARN
   org.springframework.web: DEBUG
   com.vmware.dmfrey.dataflow: DEBUG
 
 server:
-  port: 9090
+  port: 9091
 
 client:
   id: 14f47426-d6f5-4cd9-99e7-af2f47dffe54

@@ -1,0 +1,12 @@
+
+logging.level:
+  org.springframework.integration.handler: WARN
+  org.springframework.integration.ip: INFO
+  com.vmware.dmfrey.dataflow: INFO
+
+server:
+  port: 9090
+
+tcp-server:
+  port: 6666
+

@@ -13,7 +13,7 @@ public class TcpServerConfigurationProperties {
 
     public TcpServerConfigurationProperties() { }
 
-    public TcpServerConfigurationProperties( final String url, final int port, int poolSize) {
+    public TcpServerConfigurationProperties( final String url, final int port, int poolSize ) {
 
         this.url = url;
         this.port = port;
