@@ -6,7 +6,7 @@ metadata:
     app: connection-handler
   name: connection-handler
 spec:
-  replicas: 1
+  replicas: 2
   selector:
     matchLabels:
       app: connection-handler
@@ -18,7 +18,7 @@ spec:
         app: connection-handler
     spec:
       containers:
-        - image: dmfrey/connection-handler
+        - image: dmfrey/connection-handler:latest
           name: connection-handler
           ports:
             - containerPort: 8080
@@ -33,15 +33,23 @@ spec:
             - name: SPRING_CLOUD_STREAM_KAFKA_BINDER_BROKERS
               value: "kafka:9092"
 
-            - name: SPRING_REDIS_SENTINEL_PASSWORD
+#            - name: SPRING_REDIS_SENTINEL_PASSWORD
+#              valueFrom:
+#                secretKeyRef:
+#                  key: redis-password
+#                  name: redis-1601316548
+#            - name: SPRING_REDIS_SENTINEL_MASTER
+#              value: "redis-1601316548-master:6379"
+#            - name: SPRING_REDIS_SENTINEL_NODES
+#              value: "redis-1601316548-slave:6379"
+
+            - name: SPRING_REDIS_HOST
+              value: "redis-1601316548-master:6379"
+            - name: SPRING_REDIS_PASSWORD
               valueFrom:
                 secretKeyRef:
                   key: redis-password
                   name: redis-1601316548
-            - name: SPRING_REDIS_SENTINEL_MASTER
-              value: "redis-1601316548-master:6379"
-            - name: SPRING_REDIS_SENTINEL_NODES
-              value: "redis-1601316548-slave:6379"
 
             - name: TCP-SERVER_URL
               value: "192.168.86.78"
