@@ -12,6 +12,8 @@ import org.springframework.integration.ip.tcp.TcpSendingMessageHandler;
 import org.springframework.integration.ip.tcp.connection.TcpConnectionOpenEvent;
 import org.springframework.integration.ip.tcp.connection.TcpNetClientConnectionFactory;
 import org.springframework.integration.ip.tcp.serializer.ByteArrayLfSerializer;
+import org.springframework.integration.leader.event.OnGrantedEvent;
+import org.springframework.integration.leader.event.OnRevokedEvent;
 
 @Configuration
 public class TcpClient {
@@ -36,7 +38,6 @@ public class TcpClient {
 
         TcpSendingMessageHandler sendingMessageHandler = new TcpSendingMessageHandler();
         sendingMessageHandler.setConnectionFactory( connectionFactory );
-        sendingMessageHandler.setClientMode( true );
 
         return sendingMessageHandler;
     }
@@ -47,13 +48,17 @@ public class TcpClient {
         TcpReceivingChannelAdapter receivingChannelAdapter = new TcpReceivingChannelAdapter();
         receivingChannelAdapter.setConnectionFactory( connectionFactory );
         receivingChannelAdapter.setOutputChannelName( "payloadFlow.input" );
-        receivingChannelAdapter.setClientMode( true );
+        receivingChannelAdapter.setAutoStartup( false );
+        receivingChannelAdapter.setRole( "leader" );
 
         return receivingChannelAdapter;
     }
 
     @Autowired
     TcpSendingMessageHandler sendingMessageHandler;
+
+    @Autowired
+    TcpReceivingChannelAdapter receivingChannelAdapter;
 
     @Autowired
     RegisterClient registerClient;
@@ -66,6 +71,18 @@ public class TcpClient {
         clientManager.setInstanceId( instanceId );
 
         sendingMessageHandler.handleMessage( registerClient.sendRegister() );
+
+    }
+
+    @EventListener
+    void handleOnGrantedEvent( final OnGrantedEvent event ) {
+        log.info( "Leadership Granted {}", event );
+
+    }
+
+    @EventListener
+    void handleOnRevokedEvent( final OnRevokedEvent event ) {
+        log.info( "Leadership Revoked {}", event );
 
     }
 

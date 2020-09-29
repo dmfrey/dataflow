@@ -22,7 +22,7 @@ public class TcpIntegrationFlowsConfig {
     @Bean
     public IntegrationFlow heartbeatFlow( final TcpSendingMessageHandler sendingMessageHandler, final HeartbeatClient heartbeatClient ) {
 
-        return IntegrationFlows.from( heartbeatClient::sendHeartbeat, e -> e.poller( Pollers.fixedDelay( 5, TimeUnit.SECONDS, 5 ) ) )
+        return IntegrationFlows.from( heartbeatClient::sendHeartbeat, e -> e.poller( Pollers.fixedDelay( 5, TimeUnit.SECONDS, 5 ) ).role( "leader" ).autoStartup( false ) )
                 .handle( sendingMessageHandler )
                 .get();
     }

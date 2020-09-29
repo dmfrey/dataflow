@@ -3,8 +3,12 @@ logging.level:
   org.apache.kafka: WARN
   org.springframework.cloud.stream: WARN
   org.springframework.cloud.function: WARN
+  org.springframework.data.redis: INFO
   org.springframework.integration.handler: WARN
   org.springframework.integration.ip: WARN
+  org.springframework.integration.redis: INFO
+  org.springframework.integration.support.leader: INFO
+  org.springframework.integration.support.locks: INFO
   org.springframework.web: DEBUG
   com.vmware.dmfrey.dataflow: DEBUG
 
