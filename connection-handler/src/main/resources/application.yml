@@ -33,6 +33,24 @@ spring:
 
       source: adapter
 
+  sleuth:
+    traceId128: true
+    sampler.probability: 1.0
+    web.skipPattern: (^cleanup.*|.+favicon.*)
+
+  zipkin:
+    enabled: false
+
+#Actuator
+management:
+  endpoints:
+    web.exposure.include: '*'
+  endpoint:
+    health:
+      show-details: ALWAYS
+    restart:
+      enabled: true
+
 ---
 spring:
   profiles: kubernetes

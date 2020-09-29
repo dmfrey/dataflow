@@ -1,0 +1,13 @@
+spring:
+  application:
+    name: connection-handler
+
+---
+spring:
+  profiles: kubernetes
+
+  cloud:
+
+    kubernetes:
+      config:
+        name: connection-handler
