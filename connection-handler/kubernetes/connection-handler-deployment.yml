@@ -14,7 +14,7 @@ data:
               brokers: kafka:9092
 
       redis:
-        host: redis-1601316548-master
+        host: redis-1601470739-master
 
       zipkin:
         enabled: true
@@ -23,6 +23,8 @@ data:
     logging.level:
       org.springframework.data.redis: INFO
       org.springframework.integration.redis: INFO
+      org.springframework.integration.support.leader: DEBUG
+      org.springframework.integration.support.locks: DEBUG
       org.springframework.web: INFO
 
     server:
@@ -100,7 +102,7 @@ spec:
               valueFrom:
                 secretKeyRef:
                   key: redis-password
-                  name: redis-1601316548
+                  name: redis-1601470739
 
           resources: {}
 status: {}

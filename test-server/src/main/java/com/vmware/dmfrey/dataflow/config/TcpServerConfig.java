@@ -29,7 +29,7 @@ public class TcpServerConfig {
     private static final Logger log = LoggerFactory.getLogger( TcpServerConfig.class );
     private static final long HEARTBEAT_CHECK = 12000;
 
-    private final Map<String, Client> clients = new ConcurrentHashMap();
+    private final Map<String, Client> clients = new ConcurrentHashMap<>();
 
     @Bean
     public TcpNetServerConnectionFactory connectionFactory( final TcpServerConfigurationProperties properties ) {

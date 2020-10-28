@@ -1,0 +1,7 @@
+#NOTE: This is a Maven Resolver internal implementation file, its format can be changed without prior notice.
+#Tue Oct 27 21:23:26 EDT 2020
+https\://repo.spring.io/libs-snapshot-local/.error=Could not transfer artifact org.jboss.shrinkwrap.resolver\:shrinkwrap-resolver-bom\:pom\:2.2.0 from/to spring-snapshots (https\://repo.spring.io/libs-snapshot-local)\: Transfer failed for https\://repo.spring.io/libs-snapshot-local/org/jboss/shrinkwrap/resolver/shrinkwrap-resolver-bom/2.2.0/shrinkwrap-resolver-bom-2.2.0.pom 409 Conflict
+https\://repo.maven.apache.org/maven2/.lastUpdated=1603848206147
+https\://repo.spring.io/libs-milestone-local/.error=
+https\://repo.spring.io/libs-milestone-local/.lastUpdated=1603848206089
+@default-spring-snapshots-https\://repo.spring.io/libs-snapshot-local/.lastUpdated=1603848205963
